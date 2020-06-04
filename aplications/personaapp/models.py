@@ -1,7 +1,16 @@
 from django.db import models
 from aplications.departamentoapp.models import Departamento
+from ckeditor.fields import RichTextField
 
 # Create your models here.
+
+class Habilidades(models.Model):
+    habilidad = models.CharField('Habilidad', max_length=50)
+    class Meta:
+        verbose_name='Habilidad'
+        verbose_name_plural='Habilidades de empleado'
+    def __str__(self):
+        return self.habilidad
 
 class Empleado(models.Model):
     #modelo para tabla empleado
@@ -16,7 +25,9 @@ class Empleado(models.Model):
     last_name=models.CharField('Apellidos',max_length=60)
     job = models.CharField('Trabajo', max_length=5,choices=trabajos)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-    #image = models.ImageField(, upload_to=None, height_field=None, width_field=None, max_length=None)
+    #avatar = models.ImageField('Imagen', upload_to='empleado',blank=True,null=True)
+    habilidades = models.ManyToManyField(Habilidades)
+    hoja_vida = RichTextField()
     class Meta:
         verbose_name='Empleados'
         verbose_name_plural='Area de Personal'
