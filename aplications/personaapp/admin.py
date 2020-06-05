@@ -21,7 +21,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
         return obj.first_name + ' ' + obj.last_name
 
     search_fields = ('first_name',)
-    list_filter = ('job','habilidades',)
+    list_filter = ('departamento','job','habilidades',)
 #filtro para relaciones manytomany
     filter_horizontal = ('habilidades',)
 admin.site.register(Empleado,EmpleadoAdmin)
